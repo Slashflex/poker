@@ -10,28 +10,29 @@
  * - Le type de la carte (ordre croissant) : d => ♦, c => ♣, h => ♥, s => ♠
  *
  */
-const dealer = () => {
+
+export const dealer = () => {
   const cardValue = {
-    2: "2",
-    3: "3",
-    4: "4",
-    5: "5",
-    6: "6",
-    7: "7",
-    8: "8",
-    9: "9",
-    10: "10",
-    ace: "ace",
-    jack: "jack",
-    queen: "queen",
-    king: "king",
+    2: '2',
+    3: '3',
+    4: '4',
+    5: '5',
+    6: '6',
+    7: '7',
+    8: '8',
+    9: '9',
+    10: '10',
+    ace: 'ace',
+    jack: 'jack',
+    queen: 'queen',
+    king: 'king',
   };
 
   const cardType = {
-    clubs: "clubs",
-    spades: "spades",
-    hearts: "hearts",
-    diamonds: "diamonds",
+    clubs: 'clubs',
+    spades: 'spades',
+    hearts: 'hearts',
+    diamonds: 'diamonds',
   };
 
   const combined = [];
@@ -74,16 +75,3 @@ const shuffle = array => {
   }
   return shufDeck;
 }
-
-// On page Load
-window.addEventListener('load', () => {
-  const play = document.querySelector('.button');
-
-  // On click on play
-  play.addEventListener('click', e => {
-    e.preventDefault();
-    const wrappers = document.querySelectorAll('.card-container')
-    wrappers.forEach(e => e.classList.add('flip')) // Adds flip card for each card container
-    dealer()
-  })
-})
