@@ -10,11 +10,11 @@
  * - Le type de la carte (ordre croissant) : d => ♦, c => ♣, h => ♥, s => ♠
  *
  */
-import { CARDS } from "./utils.js";
+import { CARDS, CARDS_TYPE } from "./utils.js";
 
 
-// Check for card occurence
-export const occurences = cards => {
+// Check for value occurence
+export const occurencesValue = cards => {
   let occ = {};
 
   cards
@@ -39,5 +39,29 @@ export const occurences = cards => {
       });
     });
 
+  return occ;
+};
+
+export const occurencesType = cards => {
+  let occ = {};
+
+  cards
+    .map(card =>
+      card.charAt(card.length -1)
+    )
+    .forEach(typ => {
+      Object.entries(CARDS_TYPE).forEach(card => {
+        let key = card[0];
+        let type = card[1];
+
+        if (type == typ) {
+          if (occ[key]) {
+            occ[key] += 1;
+          } else {
+            occ[key] = 1;
+          }
+        }
+      });
+    });
   return occ;
 };
