@@ -19,33 +19,52 @@
  */
 
 import { isAFlush } from "./isAFlush.js";
-import { occurences } from "./occurences.js";
+import { occurencesType } from "./occurences.js";
 import { isAPair } from "./isAPair.js";
+import { isAFull } from "./isAFull.js";
 import { orderCards } from "./orderCards.js";
 
-export const bestCombo = (cards) => {
+export const bestCombo = (cards, user) => {
   let hand = [];
   let highCards = orderCards(cards)
   let count = 0;
-  let pair = [];
   let bool = true;
-  // if (isAFull(cards)) {
-  //     console.log('It\'s a full');
-  //     hand = ['As', 'Ad', 'Ah', 'Js', 'Jd'];
-  //     return hand;
-  // } 
-  if (isAFlush(cards)) {
-      console.log('It\'s a flush');
-      hand = ['As', 'Js', 'Qs', 'Js', '10s'];
-      return hand;
+  let type = ''; 
+
+  if (isAFull(highCards)) {
+    console.log('It\'s a full');
+    
+    // return hand;
+  } else if (isAFlush(cards)) { 
+    Object.entries(occurencesType(highCards)).forEach(array => {
+      let key = array[0];
+      let occurence = array[1];
+      
+      if (occurence >= 5) {
+        type = key 
+      } 
+    });
+
+    for (let k = 0; k < highCards.length; k++) {
+      if (count < 5) {
+        if (highCards[k].charAt(highCards[k].length -1) == type) {
+          hand.push(highCards[k]);
+          count++;
+        }
+      }
+    }
+    console.log(`${user} has a flush : ${hand}`)
+    return hand;
   } 
   else if (isAPair(highCards)) {
+    let pair = [];
+
     // Retrieve a pair
     for (let i = 0; i < highCards.length; i++) {
       for (let j = 0; j < highCards.length; j++) {
         if (i != j && bool) {
           if (highCards[i].charAt(0) == highCards[j].charAt(0)) {
-            pair.push(highCards[i], highCards[j]);
+            pair.push(highCards[i], highCards[j], highCards[i], highCards[j]);
             bool = false; // Stop
           }
         }
@@ -60,12 +79,12 @@ export const bestCombo = (cards) => {
         hand.push(highCards[k]);
         count++;
         if (count >= 3) {
+          console.log(`${user} has a pair : ${hand}`)
           return hand;
         }
       }
     };
   } else {
-    console.log('else')
     return highCards.slice(0, 5);
   }
 };
