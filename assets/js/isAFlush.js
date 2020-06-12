@@ -9,24 +9,18 @@
  * - La valeur de la carte : 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A
  * - Le type de la carte : d => ♦, c => ♣, h => ♥, s => ♠
  */
-
+import { occurencesType } from "./occurences.js";
+ 
 // Check whether or not there's a flush
 export const isAFlush = cards => {
-  let d,
-    c,
-    h,
-    s = 0;
+  let bool = false;
 
-  cards.forEach((items, i, array) => {
-    if (array[i].match("d")) {
-      d++;
-    } else if (array[i].match("c")) {
-      c++;
-    } else if (array[i].match("h")) {
-      h++;
-    } else {
-      s++;
+  Object.entries(occurencesType(cards)).forEach(array => {
+    let occurence = array[1];
+    
+    if (occurence >= 5) {
+      bool = true;
     }
   });
-  return s >= 5 || c >= 5 || h >= 5 || d >= 5 ? true : false;
+  return bool;
 }
