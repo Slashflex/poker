@@ -49,7 +49,6 @@ export const orderCards = cards => {
     })
     .reverse();
 }
-// console.log(orderCards(['10s', 'Qs', 'Qh', 'Qc']));
 
 function valuePower(card) {
   let key = card.charAt(0);
