@@ -229,3 +229,19 @@ body {
 .button:not(:active) {
   border-bottom: 4px solid #62AA7D;
 }
+
+[class|="confetti"] {
+  position: absolute;
+}
+
+.red {
+  background-color: #ff6b00;
+}
+
+.yellow {
+  background-color: #9054a1;
+}
+
+.blue {
+  background-color: #00acca;
+}

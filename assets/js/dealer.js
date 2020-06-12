@@ -5,9 +5,6 @@ import {
   imagesClass,
   shuffle
 } from './utils.js';
-import { isAPair } from './isAPair.js';
-import { isAFlush } from './isAFlush.js';
-import { occurences } from './occurences.js';
 import { bestCombo } from './bestCombo.js';
 
 // Get the file name of a card: 'Ac' => return 'ace_of_clubs.png'
@@ -33,10 +30,57 @@ export const dealer = () => {
   const heroCards = [tableCards[0], tableCards[1], tableCards.slice(4, 9)].flat();
   const vilainCards = [tableCards[2], tableCards[3], tableCards.slice(4, 9)].flat();
 
-  // hero hand
-  const combo = bestCombo(heroCards)
-  console.log(combo)
-
-  // vilain hand
+  bestCombo(heroCards, 'Hero')
+  bestCombo(vilainCards, 'Vilain')
   // bestCombo(vilainCards)
 };
+
+// Confetti rain
+// const create = i => {
+//   var width = Math.random() * 8;
+//   var height = width * 0.4;
+//   var colourIdx = Math.ceil(Math.random() * 3);
+//   var colour = "red";
+//   switch(colourIdx) {
+//     case 1:
+//       colour = "yellow";
+//       break;
+//     case 2:
+//       colour = "blue";
+//       break;
+//     default:
+//       colour = "red";
+//   }
+//   $(`<div class="confetti-${i} ${colour}"></div>`).css({
+//     "width" : `${width}px`,
+//     "height" : `${height}px`,
+//     "top" : `${-Math.random() * 20}%`,
+//     "left" : `${Math.random() * 100}%`,
+//     "opacity" : `${Math.random() + 0.5}`,
+//     "transform" : `rotate(${Math.random() * 360}deg)`
+//   }).appendTo('.main');  
+  
+//   drop(i);
+// }
+
+// const drop = x => {
+//   $('.confetti-'+x).animate({
+//     top: "100%",
+//     left: `+= ${Math.random() * 15}%`
+//   }, Math.random() * 3000 + 3000, () => {
+//     reset(x);
+//   });
+// }
+
+// const reset = x => {
+//   $('.confetti-'+x).animate({
+//     "top" : `${-Math.random() * 20}%`,
+//     "left" : `-= ${+Math.random() * 15}%`
+//   }, 0, () => {
+//     drop(x);             
+//   });
+// }
+
+// for (var i = 0; i < 200; i++) {
+//   create(i);
+// }
