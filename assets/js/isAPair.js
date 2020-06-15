@@ -11,7 +11,7 @@
  */
 
 // Check whether or not there's a pair
-export const isAPair = cards => {
+const isAPair = cards => {
   for (let i = 0; i < cards.length; i++) {
     for (let j = 0; j < cards.length; j++) {
       if (i != j) {
@@ -26,3 +26,5 @@ export const isAPair = cards => {
   }
   return false;
 }
+
+export { isAPair };

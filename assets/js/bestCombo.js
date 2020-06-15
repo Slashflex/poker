@@ -19,44 +19,69 @@
  */
 
 import { isAFlush } from "./isAFlush.js";
-import { occurencesType } from "./occurences.js";
+import { occurences, occurencesType } from "./occurences.js";
 import { isAPair } from "./isAPair.js";
 import { isAFull } from "./isAFull.js";
 import { orderCards } from "./orderCards.js";
+import { CARDS } from "./utils.js";
 
 export const bestCombo = (cards, user) => {
   let hand = [];
-  let highCards = orderCards(cards)
+  let highCards = orderCards(cards);
   let count = 0;
   let bool = true;
-  let type = ''; 
+  let type = "";
+
+  let cardsValue = highCards.map((card) => card.slice(0, card.length - 1));
 
   if (isAFull(highCards)) {
-    console.log('It\'s a full');
-    
-    // return hand;
-  } else if (isAFlush(cards)) { 
-    Object.entries(occurencesType(highCards)).forEach(array => {
+    const occ = occurences(highCards);
+
+    for (const [key, value] of Object.entries(occ)) {
+      let two = false;
+      let three = false;
+
+      if (value == 2 && three == false) {
+        three = true;
+        occ[key] = 0;
+        for (let i = 0; i < highCards.length; i++) {
+          if (cardsValue[i] == CARDS[key]) hand.push(highCards[i]);
+        }
+      }
+
+      if (value == 3 && two == false) {
+        two = true;
+        occ[key] = 0;
+        for (let i = 0; i < highCards.length; i++) {
+          if (cardsValue[i] == CARDS[key]) hand.push(highCards[i]);
+        }
+      }
+    }
+
+    console.log(`${user} has a full: ${hand}`);
+
+    return hand;
+  } else if (isAFlush(cards)) {
+    Object.entries(occurencesType(highCards)).forEach((array) => {
       let key = array[0];
       let occurence = array[1];
-      
+
       if (occurence >= 5) {
-        type = key 
-      } 
+        type = key;
+      }
     });
 
     for (let k = 0; k < highCards.length; k++) {
       if (count < 5) {
-        if (highCards[k].charAt(highCards[k].length -1) == type) {
+        if (highCards[k].charAt(highCards[k].length - 1) == type) {
           hand.push(highCards[k]);
           count++;
         }
       }
     }
-    console.log(`${user} has a flush : ${hand}`)
+    console.log(`${user} has a flush : ${hand}`);
     return hand;
-  } 
-  else if (isAPair(highCards)) {
+  } else if (isAPair(highCards)) {
     let pair = [];
 
     // Retrieve a pair
@@ -79,11 +104,11 @@ export const bestCombo = (cards, user) => {
         hand.push(highCards[k]);
         count++;
         if (count >= 3) {
-          console.log(`${user} has a pair : ${hand}`)
+          console.log(`${user} has a pair : ${hand}`);
           return hand;
         }
       }
-    };
+    }
   } else {
     return highCards.slice(0, 5);
   }

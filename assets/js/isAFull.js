@@ -12,7 +12,7 @@
 
 import { occurencesValue } from './occurences.js';
 
-export const isAFull = (cards) => {
+const isAFull = (cards) => {
 
   const occ = occurencesValue(cards);
   let two = false;
@@ -30,3 +30,5 @@ export const isAFull = (cards) => {
   }
   return two && three;
 };
+
+export { isAFull };

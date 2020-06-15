@@ -14,7 +14,7 @@ import { CARDS, CARDS_TYPE } from "./utils.js";
 
 
 // Check for value occurence
-export const occurencesValue = cards => {
+const occurencesValue = cards => {
   let occ = {};
 
   cards
@@ -42,7 +42,7 @@ export const occurencesValue = cards => {
   return occ;
 };
 
-export const occurencesType = cards => {
+const occurencesType = cards => {
   let occ = {};
 
   cards
@@ -65,3 +65,34 @@ export const occurencesType = cards => {
     });
   return occ;
 };
+
+const occurences = cards => {
+	let cardsValue = cards.map(card => card.slice(0, card.length - 1))
+	let count = new Object()
+	let nbOcc = 0
+	for (let [key, value] of Object.entries(CARDS)) {
+		nbOcc = nbOccurences(cardsValue, value)
+		if (nbOcc > 0) count[key] = nbOcc
+	}
+	return count
+}
+
+const allIndexOf = (arr, value) => {
+	if (arr.indexOf(value) >= 0) {
+		let res = []
+		for( let i = arr.indexOf(value); i >= 0; i = arr.indexOf(value,i+1) ) {
+			res.push(i)
+		}
+		return res
+	}
+	else return false
+}
+
+// Get the number of occurences
+const nbOccurences = (arr, value) => {
+	let indexes = allIndexOf(arr, value)
+	if (indexes != false) return indexes.length
+	else return false
+}
+
+export { occurencesValue, occurencesType, occurences };

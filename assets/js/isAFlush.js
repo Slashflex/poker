@@ -12,7 +12,7 @@
 import { occurencesType } from "./occurences.js";
  
 // Check whether or not there's a flush
-export const isAFlush = cards => {
+const isAFlush = cards => {
   let bool = false;
 
   Object.entries(occurencesType(cards)).forEach(array => {
@@ -24,3 +24,5 @@ export const isAFlush = cards => {
   });
   return bool;
 }
+
+export { isAFlush };

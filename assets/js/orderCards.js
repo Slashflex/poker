@@ -32,7 +32,7 @@ const TYPES_POWER = {
   d: 1,
 };
 
-export const orderCards = cards => {
+const orderCards = cards => {
   return cards
     .sort((a, b) => {
       if (valuePower(a) < valuePower(b)) {
@@ -50,11 +50,13 @@ export const orderCards = cards => {
     .reverse();
 }
 
-function valuePower(card) {
+const valuePower = card => {
   let key = card.charAt(0);
   return VALUES_POWER[key];
 }
-function typePower(card) {
+const typePower = card => {
   let key = card.charAt(card.length - 1);
   return TYPES_POWER[key];
 }
+
+export { orderCards };
