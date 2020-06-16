@@ -60,7 +60,7 @@ export const bestCombo = (cards, user) => {
 
     console.log(`${user} has a full: ${hand}`);
 
-    return hand;
+    return hand.slice(0, 5);
   } else if (isAFlush(cards)) {
     Object.entries(occurencesType(highCards)).forEach((array) => {
       let key = array[0];
@@ -110,6 +110,7 @@ export const bestCombo = (cards, user) => {
       }
     }
   } else {
+    console.log(`${user} has highest cards`)
     return highCards.slice(0, 5);
   }
 };

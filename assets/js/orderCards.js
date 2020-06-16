@@ -12,8 +12,8 @@
 
 const VALUES_POWER = {
   A: 14,
-  Q: 13,
-  K: 12,
+  K: 13,
+  Q: 12,
   J: 11,
   '1': 10,
   '9': 9,
@@ -59,4 +59,4 @@ const typePower = card => {
   return TYPES_POWER[key];
 }
 
-export { orderCards };
+export { orderCards, valuePower, typePower };
