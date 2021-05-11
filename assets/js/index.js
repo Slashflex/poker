@@ -23,9 +23,6 @@ window.addEventListener('load', () => {
     // });
     wrappers.forEach((e) => e.classList.add('flip')); // Adds flip card for each card container
     
-    
-    
-    
     dealer();
   });
 });
